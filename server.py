@@ -31,10 +31,30 @@ def process():
         is_valid = False
         flash('Please enter in a valid email.')
 
-    if len(request.form['pw1']) < 8:
-        flash("Please enter a password with 8 or more characters")
+    SpecialSym = ['$', '@', '#', '%']
+    if len(request.form['pw1']) < 5:
+        flash("Please enter a password with 5 or more characters")
+        is_valid = False
     elif request.form['pw1'] != request.form['pw2']:
         flash('Your passwords does not match')
+    elif len(request.form['pw1']) < 6:
+        flash('length should be at least 6')
+        is_valid = False
+    elif len(request.form['pw1']) > 20:
+        flash('length should be not be greater than 8')
+        is_valid = False
+    elif not any(char.isdigit() for char in request.form['pw1']):
+        flash('Password should have at least one numeral')
+        is_valid = False
+    elif not any(char.isupper() for char in request.form['pw1']):
+        flash('Password should have at least one uppercase letter')
+        is_valid = False
+    elif not any(char.islower() for char in request.form['pw1']):
+        flash('Password should have at least one lowercase letter')
+        is_valid = False
+    elif not any(char in SpecialSym for char in request.form['pw1']):
+        flash('Password should have at least one of the symbols $@#')
+        is_valid = False
 
     if is_valid:
         mySql = MySQLConnection('basic_regstration')
