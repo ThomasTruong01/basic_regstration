@@ -32,60 +32,120 @@
 			href="{{ url_for('static', filename='style.css') }}"
 		/>
 		<link rel="stylesheet" href="../static/style.css" />
+		<style>
+			.container div {
+				display: inline-block;
+				vertical-align: top;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
-			<p class="h1"><u>Registration</u></p>
-			<!-- declare a variable called messages -->
-			{% with messages = get_flashed_messages() %}
-			<!-- check if there are any messages -->
-			{% if messages %}
-			<!-- loop through the messages -->
-			{% for message in messages %}
-			<!-- display each message in a paragraph tag -->
-			<p>{{ message }}</p>
-			{% endfor %} {% endif %} {% endwith %}
-
-			<form action="process" method="post">
-				<div class="form-group">
-					<label for="fName" class="col-sm-2 col-form-label">First name</label>
-					<div class="col-sm-10">
-						<input type="text" name="fName" id="fName" class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="lName" class="col-sm-2 col-form-label">Last Name</label>
-					<div class="col-sm-10">
-						<input type="text" name="lName" id="lName" class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="email" class="col-sm-2 col-form-label">Email</label>
-					<div class="col-sm-10">
-						<input type="email" name="email" id="email" class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="pw1" class="col-sm-2 col-form-label">Password</label>
-					<div class="col-sm-10">
-						<input type="password" name="pw1" id="pw1" class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="pw2" class="col-sm-2 col-form-label"
-						>Confirm Password</label
-					>
-					<div class="col-sm-10">
-						<input type="password" name="pw2" id="pw2" class="form-control" />
-					</div>
+			<div class="registration col-sm-6">
+				<p class="h1"><u>Registration</u></p>
+				<div class="errMsg">
+					<!-- declare a variable called messages -->
+					{% with messages = get_flashed_messages() %}
+					<!-- check if there are any messages -->
+					{% if messages %}
+					<!-- loop through the messages -->
+					{% for message in messages %}
+					<!-- display each message in a paragraph tag -->
+					<p>{{ message }}</p>
+					{% endfor %} {% endif %} {% endwith %}
 				</div>
 
-				<input
-					type="submit"
-					value="Register"
-					class="form-control btn btn-primary col-sm-2"
-				/>
-			</form>
+				<form action="process" method="post">
+					<div class="form-group col-sm-12">
+						<label for="fName" class="col-sm-8 col-form-label"
+							>First name</label
+						>
+						<div class="col-sm-12">
+							<input
+								type="text"
+								name="fName"
+								id="fName"
+								class="form-control"
+								value="{{ session['fName'] }}"
+							/>
+						</div>
+					</div>
+					<div class="form-group col-sm-12">
+						<label for="lName" class="col-sm-8 col-form-label">Last Name</label>
+						<div class="col-sm-12">
+							<input
+								type="text"
+								name="lName"
+								id="lName"
+								class="form-control"
+								value="{{ session['lName'] }}"
+							/>
+						</div>
+					</div>
+					<div class="form-group col-sm-12">
+						<label for="email" class="col-sm-8 col-form-label">Email</label>
+						<div class="col-sm-12">
+							<input
+								type="email"
+								name="email"
+								id="email"
+								class="form-control"
+								value="{{ session['email'] }}"
+							/>
+						</div>
+					</div>
+					<div class="form-group col-sm-12">
+						<label for="pw1" class="col-sm-8 col-form-label">Password</label>
+						<div class="col-sm-12">
+							<input type="password" name="pw1" id="pw1" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group col-sm-12">
+						<label for="pw2" class="col-sm-8 col-form-label"
+							>Confirm Password</label
+						>
+						<div class="col-sm-12">
+							<input type="password" name="pw2" id="pw2" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<input
+							type="submit"
+							value="Register"
+							class="form-control btn btn-primary"
+						/>
+					</div>
+				</form>
+			</div>
+			<div class="login col-sm-5">
+				<p class="h1"><u>Login</u></p>
+				<form action="/login" method="POST">
+					<div class="form-group col-sm-12">
+						<label for="email" class="col-sm-8 col-form-label">Email</label>
+						<div class="col-sm-10">
+							<input
+								type="email"
+								name="email"
+								id="email"
+								class="form-control"
+							/>
+						</div>
+					</div>
+					<div class="form-group col-sm-12">
+						<label for="pw1" class="col-sm-8 col-form-label">Password</label>
+						<div class="col-sm-10">
+							<input type="password" name="pw1" id="pw1" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<input
+							type="submit"
+							value="Login"
+							class="form-control btn btn-primary"
+						/>
+					</div>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>
