@@ -120,9 +120,13 @@ def login():
 def success():
     if session.get('login'):
         if session['login']:
-            return render_template('success.html')
+            return render_template('dashboard.html')
     else:
         return redirect('/')
+
+
+@app.route('/tweets/create', methods=['POST'])
+def createTweet():
 
 
 @app.route('/logout')
